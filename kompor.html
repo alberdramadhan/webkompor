@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ServisKomporPro — Jasa Service Kompor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #fbfdff;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --primary: #0f172a;
+      --accent: #f97316;
+      --brand: linear-gradient(135deg,#0ea5e9 0%, #6366f1 100%);
+      --radius: 12px;
+      --fs-xs: .75rem;  --fs-sm: .875rem; --fs-md: 1rem; --fs-lg: 1.125rem; --fs-xl: 1.5rem; --fs-xxl: 2rem;
+      --max-width: 1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:'Inter','Poppins',system-ui, -apple-system,'Segoe UI',Roboto; background:var(--bg);color:var(--primary);-webkit-font-smoothing:antialiased;line-height:1.45;font-size:var(--fs-md)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+    header{background:transparent;padding:14px 0;position:sticky;top:0;backdrop-filter: blur(6px);z-index:60;transition:all .28s}
+    header.scrolled{background:white;box-shadow:0 6px 20px rgba(2,6,23,.04)}
+    .nav-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--primary)}
+    .mark{width:54px;height:54px;border-radius:12px;background:var(--brand);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:0 6px 18px rgba(99,102,241,.18);flex-shrink:0}
+    .title{font-weight:700;font-size:var(--fs-lg);letter-spacing:0.2px}
+    .subtitle{display:block;font-size:var(--fs-sm);color:var(--muted);margin-top:3px}
+    nav ul{display:flex;gap:18px;align-items:center;margin:0;padding:0;list-style:none}
+    nav a{color:var(--primary);text-decoration:none;font-weight:600;font-size:var(--fs-sm)}
+    nav a:hover{color:var(--accent)}
+    .cta{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:white;padding:9px 14px;border-radius:10px;font-weight:700;text-decoration:none}
+
+    .hero{margin-top:10px;padding:48px 0 56px;background:linear-gradient(180deg, rgba(99,102,241,.06), transparent 60%);overflow:hidden}
+    .hero-grid{display:grid;grid-template-columns:1fr 420px;gap:32px;align-items:center}
+    .hero h1{margin:0;font-size:var(--fs-xxl);line-height:1.04}
+    .lead{color:var(--muted);font-size:var(--fs-lg);margin-top:10px}
+    .hero-card{background:var(--card);padding:20px;border-radius:14px;box-shadow:0 8px 30px rgba(15,23,42,.06)}
+    .stat{display:flex;gap:12px;align-items:center}
+    .stat .n{font-weight:700;font-size:var(--fs-lg)}
+    .stat .t{font-size:var(--fs-sm);color:var(--muted)}
+
+    .section{padding:44px 0}
+    .section h2{font-size:var(--fs-xl);margin:0 0 18px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(2,6,23,.04);display:flex;flex-direction:column;gap:12px;min-height:240px;transform:translateY(0);transition:all .36s;will-change:transform,box-shadow}
+    .card:hover{transform:translateY(-8px);box-shadow:0 16px 40px rgba(2,6,23,.08)}
+    .card img{width:100%;height:130px;object-fit:cover;border-radius:8px}
+    .card h3{margin:0;font-size:var(--fs-lg)}
+    .card p{margin:0;color:var(--muted);font-size:var(--fs-sm);flex-grow:1}
+    .card .btn{align-self:flex-start;padding:8px 12px;background:transparent;border:1px solid rgba(15,23,42,.06);border-radius:8px;font-weight:600;font-size:var(--fs-sm)}
+
+    .about{display:flex;gap:28px;align-items:center}
+    .about img{width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,.06)}
+    .contact-card{display:flex;gap:18px;align-items:flex-start;background:var(--card);padding:20px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.04)}
+    form label{display:block;font-size:var(--fs-sm);font-weight:600;margin-bottom:6px}
+    input,textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;font-size:var(--fs-md);outline:none}
+    input:focus,textarea:focus{box-shadow:0 0 0 4px rgba(99,102,241,.06);border-color:#c7d2fe}
+    .submit{background:var(--brand);background-size:200% 200%;color:white;padding:10px 14px;border-radius:10px;border:none;font-weight:700;cursor:pointer}
+    footer{margin-top:36px;padding:24px 0;text-align:center;color:var(--muted);font-size:var(--fs-sm)}
+
+    .wa-float{position:fixed;right:22px;bottom:22px;z-index:120;display:flex;align-items:center;gap:12px}
+    .wa-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25D366,#16a34a);color:white;padding:12px 16px;border-radius:999px;box-shadow:0 8px 28px rgba(37,211,102,.18);text-decoration:none;font-weight:700;font-size:var(--fs-sm);transform:translateY(0);transition:transform .18s}
+    .wa-btn:hover{transform:translateY(-6px)}
+    .wa-icon{width:42px;height:42px;display:flex;align-items:center;justify-content:center;background:white;border-radius:50%;box-shadow:inset 0 -2px 6px rgba(0,0,0,.06)}
+    .wa-icon svg{width:22px;height:22px}
+    .wa-phone{font-size:var(--fs-sm);color:white}
+
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:all .6s cubic-bezier(.2,.9,.2,1)}
+    .reveal.visible{opacity:1;transform:none}
+
+    .typing{color:var(--accent);font-weight:700}
+
+    .controls{display:flex;gap:8px;margin-top:12px}
+    .chip{padding:8px 12px;background:#fff;border-radius:999px;border:1px solid rgba(2,6,23,.04);cursor:pointer}
+
+    @media (max-width:1000px){.hero-grid{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.about{flex-direction:column}}
+    @media (max-width:640px){nav ul{display:none}.grid{grid-template-columns:1fr}.brand .title{font-size:var(--fs-md)}.hero h1{font-size:1.5rem}.wa-btn{padding:10px 12px}}
+
+    /* Simple modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,.5);z-index:200}
+    .modal.show{display:flex}
+    .modal .panel{background:white;padding:18px;border-radius:12px;max-width:920px;width:92%}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-row">
+      <a class="brand" href="#home" aria-label="ServisKomporPro Home">
+        <div class="mark">MK</div>
+        <div>
+          <div class="title">Maskur Kompor</div>
+          <span class="subtitle">Cepat • Aman • Bergaransi</span>
+        </div>
+      </a>
+
+      <nav aria-label="Utama navigasi">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#services">Layanan</a></li>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <a class="cta" href="#contact">Pesan Sekarang</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <h1>Jasa Service Kompor Profesional & Terpercaya — <span id="typed" class="typing">Instalasi • Perbaikan • Garansi</span></h1>
+            <p class="lead">Teknisi berpengalaman, spare part asli, garansi pekerjaan. Layanan untuk kompor gas, kompor listrik, dan instalasi baru.</p>
+
+            <div style="margin-top:18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+              <a class="cta" href="#contact">Hubungi Teknisi</a>
+              <div class="hero-card reveal" data-reveal>
+                <div class="stat"><div class="n" data-count="25">0</div><div class="t">Tahun pengalaman</div></div>
+                <div style="height:8px"></div>
+                <div class="stat"><div class="n" data-count="10000">0</div><div class="t">Pelanggan puas</div></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div>
+            <div class="hero-card reveal" data-reveal>
+              <h3 style="margin:0 0 8px">Layanan Unggulan</h3>
+              <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:var(--fs-sm)">
+                <li>Pemeriksaan & diagnosa cepat</li>
+                <li>Penggantian spare part original</li>
+                <li>Instalasi aman sesuai standar</li>
+                <li>Garansi setelah pengerjaan</li>
+              </ul>
+              <div style="margin-top:12px;display:flex;gap:8px">
+                <button class="btn" id="openServices">Lihat Layanan</button>
+                <a class="btn" href="#contact">Minta Estimasi</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="center">Layanan Kami</h2>
+        <p class="center muted" style="margin-top:8px">Solusi lengkap untuk semua jenis kompor — gas, listrik, dan instalasi.</p>
+
+        <div style="height:12px" class="center">
+          <div class="controls">
+            <div class="chip" data-filter="all">Semua</div>
+            <div class="chip" data-filter="gas">Kompor Gas</div>
+            <div class="chip" data-filter="listrik">Kompor Listrik</div>
+            <div class="chip" data-filter="instalasi">Instalasi</div>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+        <div class="grid" id="servicesGrid">
+          <article class="card reveal" data-type="gas" data-reveal>
+            <img data-src="https://images.unsplash.com/photo-1581579180179-2d0d7b1d0f3b?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=123" alt="Service Kompor Gas">
+            <h3>Service Kompor Gas</h3>
+            <p>Perbaikan kebocoran, penggantian regulator, dan pembersihan sistem pembakaran agar lebih hemat gas dan aman.</p>
+            <button class="btn" data-open="img1">Lihat Foto</button>
+          </article>
+
+          <article class="card reveal" data-type="listrik" data-reveal>
+            <img data-src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=abc" alt="Service Kompor Listrik">
+            <h3>Service Kompor Listrik / Induksi</h3>
+            <p>Diagnosa rangkaian elektronika, penggantian sensor, dan kalibrasi agar pemanasan presisi kembali normal.</p>
+            <button class="btn" data-open="img2">Lihat Foto</button>
+          </article>
+
+          <article class="card reveal" data-type="instalasi" data-reveal>
+            <img data-src="https://images.unsplash.com/photo-1616627410514-0b2a7b8b5e1d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=xyz" alt="Instalasi Kompor">
+            <h3>Instalasi & Pemasangan</h3>
+            <p>Pengerjaan instalasi pipa gas dan supply listrik sesuai standar keselamatan, termasuk pengecekan akhir yang tuntas.</p>
+            <button class="btn" data-open="img3">Lihat Foto</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section" style="background:transparent;padding-top:8px">
+      <div class="container about">
+        <div style="flex:1">
+          <h2>Tentang Kami</h2>
+          <p class="muted">ServisKomporPro telah melayani berbagai rumah tangga dan bisnis kecil dengan fokus pada kecepatan, keamanan, dan kualitas spare part. Teknisi kami tersertifikasi dan selalu menggunakan alat ukur profesional untuk memastikan setiap pekerjaan rapi dan aman.</p>
+
+          <ul style="margin-top:12px;color:var(--muted);font-size:var(--fs-sm)">
+            <li>Garansi pekerjaan 1-2 tahun</li>
+            <li>Teknisi berpengalaman</li>
+            <li>Transparansi biaya & estimasi</li>
+          </ul>
+        </div>
+
+        <div style="width:420px">
+          <img data-src="https://images.unsplash.com/photo-1607082345960-0b3c3b9f3a63?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=def" alt="Tim Servis">
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2 class="center">Hubungi Kami</h2>
+        <p class="center muted">Isi form atau klik tombol WhatsApp untuk ngobrol langsung dengan teknisi.</p>
+
+        <div style="height:18px"></div>
+        <div class="contact-card">
+          <form id="contactForm" style="flex:1">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label for="name">Nama</label>
+                <input id="name" type="text" placeholder="Masukkan nama" required>
+              </div>
+              <div>
+                <label for="phone">No. HP</label>
+                <input id="phone" type="tel" placeholder="Contoh: 0856xxxxxxx" required>
+              </div>
+            </div>
+
+            <div style="margin-top:10px">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="email@contoh.com">
+            </div>
+
+            <div style="margin-top:10px">
+              <label for="message">Pesan / Masalah</label>
+              <textarea id="message" rows="5" placeholder="Jelaskan masalah kompor Anda" required></textarea>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+              <button class="submit" type="submit">Kirim Pesan</button>
+              <small class="muted">Atau hubungi langsung lewat WhatsApp</small>
+            </div>
+          </form>
+
+          <div style="width:320px;min-width:220px">
+            <div style="background:#fff;padding:18px;border-radius:12px;box-shadow:0 8px 24px rgba(2,6,23,.04)">
+              <h4 style="margin:0 0 8px">Hubungi lewat WhatsApp</h4>
+              <p class="muted" style="margin:0 0 12px">Klik tombol di bawah untuk memulai chat cepat. Kami biasanya merespon dalam beberapa jam kerja.</p>
+              <a class="wa-btn" href="https://wa.me/628568159248" target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp ServisKomporPro">
+                <span class="wa-icon" aria-hidden>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                    <path d="M20.52 3.48A11.86 11.86 0 0012 .5 11.9 11.9 0 003.48 3.48 11.86 11.86 0 00.5 12c0 2.07.54 4.09 1.56 5.86L.5 23.5l5.9-1.54A11.86 11.86 0 0012 23.5c3.15 0 6.09-1.23 8.52-3.48A11.9 11.9 0 0023.5 12c0-3.16-1.23-6.09-3-8.52z" fill="#25D366"/>
+                    <path d="M17.1 14.04c-.26-.13-1.52-.76-1.76-.85-.24-.09-.41-.13-.58.13-.17.26-.66.85-.81 1.02-.15.17-.3.19-.56.07-.26-.13-1.09-.4-2.07-1.28-.77-.67-1.29-1.5-1.44-1.76-.15-.26-.02-.4.11-.53.12-.12.26-.32.39-.48.13-.17.17-.3.26-.5.09-.2.05-.38-.02-.52-.07-.13-.58-1.4-.8-1.92-.21-.5-.43-.43-.58-.44l-.48-.01c-.16 0-.42.06-.64.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.36.99 2.53.12.17 1.71 2.74 4.15 3.74 2.44 1 2.44.67 2.88.63.44-.04 1.41-.57 1.61-1.12.2-.55.2-1.01.14-1.12-.06-.11-.24-.17-.5-.3z" fill="#fff"/>
+                  </svg>
+                </span>
+                <span style="color:inherit">Chat: <strong style="margin-left:6px">0856-xxxx-xxxx</strong></span>
+              </a>
+            </div>
+
+            <div style="margin-top:12px;text-align:center;font-size:var(--fs-sm);color:var(--muted)">
+              <div>Jam kerja: Senin - Minggu (08:00 - 18:00)</div>
+              <div style="margin-top:6px">Siap Melayani Se-Jabodetabek dan Sekitarnya.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>&copy; 2025 Maskur Kompor — Semua hak cipta dilindungi.</div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <div class="wa-float">
+    <a class="wa-btn" href="https://wa.me/628568159248" target="_blank" rel="noopener noreferrer" aria-label="Chat cepat WhatsApp">
+      <span class="wa-icon" aria-hidden>
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+          <path d="M20.52 3.48A11.86 11.86 0 0012 .5 11.9 11.9 0 003.48 3.48 11.86 11.86 0 00.5 12c0 2.07.54 4.09 1.56 5.86L.5 23.5l5.9-1.54A11.86 11.86 0 0012 23.5c3.15 0 6.09-1.23 8.52-3.48A11.9 11.9 0 0023.5 12c0-3.16-1.23-6.09-3-8.52z" fill="#25D366"/>
+          <path d="M17.1 14.04c-.26-.13-1.52-.76-1.76-.85-.24-.09-.41-.13-.58.13-.17.26-.66.85-.81 1.02-.15.17-.3.19-.56.07-.26-.13-1.09-.4-2.07-1.28-.77-.67-1.29-1.5-1.44-1.76-.15-.26-.02-.4.11-.53.12-.12.26-.32.39-.48.13-.17.17-.3.26-.5.09-.2.05-.38-.02-.52-.07-.13-.58-1.4-.8-1.92-.21-.5-.43-.43-.58-.44l-.48-.01c-.16 0-.42.06-.64.31-.22.25-.85.83-.85 2.03 0 1.2.87 2.36.99 2.53.12.17 1.71 2.74 4.15 3.74 2.44 1 2.44.67 2.88.63.44-.04 1.41-.57 1.61-1.12.2-.55.2-1.01.14-1.12-.06-.11-.24-.17-.5-.3z" fill="#fff"/>
+        </svg>
+      </span>
+      <span class="wa-phone">Hubungi via WhatsApp</span>
+    </a>
+  </div>
+
+  <!-- Simple modal for images -->
+  <div id="modal" class="modal" aria-hidden>
+    <div class="panel">
+      <button id="closeModal" style="float:right;border:none;background:transparent;font-weight:700;cursor:pointer">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    // --- Utilities ---
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',function(e){
+        const href=this.getAttribute('href');
+        if(!href.startsWith('#')) return;
+        e.preventDefault();
+        const el=document.querySelector(href);
+        if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+      })
+    })
+
+    // Header shrink on scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll',()=>{
+      if(window.scrollY>40) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+    });
+
+    // Typing effect
+    (function typing(){
+      const el = document.getElementById('typed');
+      const phrases = ['Instalasi • Perbaikan • Garansi','Teknisi Berpengalaman','Respon Cepat & Harga Jelas'];
+      let p=0, i=0, forward=true;
+      function step(){
+        const cur = phrases[p];
+        el.textContent = cur.slice(0,i) + (i%2? '':'');
+        if(forward){ i++; if(i>cur.length){ forward=false; setTimeout(step,1200); return; }} else { i--; if(i<0){ forward=true; p=(p+1)%phrases.length; }}
+        setTimeout(step,80);
+      }
+      step();
+    })();
+
+    // Reveal on scroll + lazy load images
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting){
+          en.target.classList.add('visible');
+          // animate counters inside
+          en.target.querySelectorAll('[data-count]').forEach(runCount);
+          // lazy load images inside
+          en.target.querySelectorAll('img[data-src]').forEach(img=>{ if(!img.src){ img.src = img.getAttribute('data-src'); }});
+          io.unobserve(en.target);
+        }
+      })
+    },{threshold:0.12});
+    revealEls.forEach(el=>io.observe(el));
+
+    // Auto-run counters
+    function runCount(el){
+      const end = +el.getAttribute('data-count')||0;
+      let cur = 0; const dur=900; const step = Math.max(1, Math.round(end/(dur/16)));
+      const t = setInterval(()=>{
+        cur += step; if(cur>=end){ cur=end; clearInterval(t);} el.textContent = cur;
+      },16);
+    }
+
+    // Service filter chips
+    $$('.chip').forEach(chip=>chip.addEventListener('click',function(){
+      const type = this.getAttribute('data-filter');
+      $$('.chip').forEach(c=>c.style.background='');
+      this.style.background='linear-gradient(90deg,#eef2ff, #fff)';
+      const cards = $$('#servicesGrid .card');
+      cards.forEach(card=>{
+        if(type==='all' || card.getAttribute('data-type')===type) card.style.display='flex'; else card.style.display='none';
+      });
+    }));
+
+    // Open image modal
+    document.addEventListener('click',e=>{
+      const btn = e.target.closest('[data-open]');
+      if(btn){
+        const id = btn.getAttribute('data-open');
+        const img = btn.closest('.card').querySelector('img');
+        openModal(`<img src='${img.src||img.getAttribute('data-src')}' style='width:100%;border-radius:8px'/>`);
+      }
+    });
+    function openModal(html){ $('#modal').classList.add('show'); $('#modalContent').innerHTML = html; $('#modal').setAttribute('aria-hidden','false'); }
+    $('#closeModal').addEventListener('click',()=>{ $('#modal').classList.remove('show'); $('#modal').setAttribute('aria-hidden','true'); });
+    $('#modal').addEventListener('click',e=>{ if(e.target===$('#modal')){ $('#modal').classList.remove('show'); $('#modal').setAttribute('aria-hidden','true'); } });
+
+    // Simple form submit with animation + fake API delay (UI only)
+    document.getElementById('contactForm').addEventListener('submit',async function(e){
+      e.preventDefault();
+      const name=document.getElementById('name').value.trim();
+      const phone=document.getElementById('phone').value.trim();
+      const message=document.getElementById('message').value.trim();
+      if(!name||!phone||!message){ alert('Mohon isi semua field yang diperlukan.'); return; }
+      const btn = this.querySelector('.submit'); btn.disabled=true; const prev=btn.textContent; btn.textContent='Mengirim...';
+      // simulate network
+      await new Promise(r=>setTimeout(r,900));
+      btn.textContent='Terkirim ✓';
+      setTimeout(()=>{ btn.disabled=false; btn.textContent=prev; this.reset(); },1400);
+
+      // optional: show toaster
+      showToast('Pesan terkirim. Tim kami akan menghubungi Anda via WhatsApp/Telepon.');
+    });
+
+    // Toast notification
+    function showToast(msg){
+      let t = document.createElement('div'); t.textContent=msg; t.style.position='fixed'; t.style.left='50%'; t.style.transform='translateX(-50%)'; t.style.bottom='26px'; t.style.background='rgba(15,23,42,.9)'; t.style.color='white'; t.style.padding='10px 14px'; t.style.borderRadius='10px'; t.style.zIndex=9999; document.body.appendChild(t);
+      setTimeout(()=>{ t.style.transition='all .4s'; t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; },2200);
+      setTimeout(()=>t.remove(),2600);
+    }
+
+    // Small animation for WhatsApp button (pulse)
+    setInterval(()=>{ const w = document.querySelector('.wa-btn'); if(!w) return; w.animate([{transform:'translateY(0) scale(1)'},{transform:'translateY(-6px) scale(1.02)'},{transform:'translateY(0) scale(1)'}],{duration:2600,iterations:1}); },3000);
+
+    // Accessibility: keyboard ESC closes modal
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ $('#modal').classList.remove('show'); $('#modal').setAttribute('aria-hidden','true'); } });
+
+    // Ensure initial images lazy load when in view (for top content)
+    document.querySelectorAll('img[data-src]').forEach(img=>{ if(img.getBoundingClientRect().top < window.innerHeight + 80){ img.src = img.getAttribute('data-src'); }});
+
+    // Open services modal via button
+    $('#openServices').addEventListener('click',()=>{
+      const html = `<h3>Layanan Lengkap</h3><p class='muted'>Kami menawarkan service, penggantian sparepart, instalasi, dan konsultasi pasca servis untuk memastikan kompor Anda aman.</p><ul><li>Diagnosa cepat</li><li>Teknisi berpengalaman</li><li>Garansi 1-2 Tahun</li></ul>`;
+      openModal(html);
+    });
+
+    // Init: reveal top hero stats
+    document.querySelectorAll('[data-reveal]').forEach(el=>{ if(el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('visible'); el.querySelectorAll('[data-count]').forEach(runCount); }});
+  </script>
+</body>
+</html>
